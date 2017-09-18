@@ -23,6 +23,10 @@ terraform apply
 ```
 The function returns a shareable URL to your Jupyter notebook on the cloud!
 
+## User Guide
+
+See [User Guide](https://github.com/mikekosk/datascience-cloud/blob/master/USER-GUIDE.md)
+
 ## License
 
 [MIT](https://github.com/electron/electron/blob/master/LICENSE "MIT")
