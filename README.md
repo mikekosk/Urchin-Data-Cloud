@@ -13,9 +13,15 @@ The script installs and configures:
 
 ## Installation
 
-See [Install Guide](https://www.google.com "Install Guice")
+See [Install Guide](https://github.com/mikekosk/datascience-cloud/blob/master/INSTALL.md "Install Guide")
 
-## Demo
+## Quick Run
+
+Building your instance and configuring it is done entirely by running:
+``` 
+terraform apply
+```
+The function returns a shareable URL to your Jupyter notebook on the cloud!
 
 ## License
 
