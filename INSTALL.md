@@ -1,6 +1,8 @@
 # Installation Guide
 
-Following this installation guide, you will be able to spin up a custom EC2 instance with just one command.  Instructions have only been tested on Ubuntu Linux, Mac OSX, and Windows.
+Following this installation guide, you will be able to spin up a custom EC2 instance with just one command.  Instructions have been tested on Ubuntu Linux and Mac OSX.  
+
+Setup should take less than 10 minutes if you're familiar with these tools, but still less than 30 minutes if you're starting from scratch. 
 
 **You will be installing:**
 - Terraform - to spin up an EC2 instance programmatically 
@@ -34,13 +36,15 @@ Verify your installation by typing “terraform” in your terminal with no argu
 $ terraform 
 Usage: terraform [--version] [--help] <command> [args]
 [...]
-````
+```
 
 ## Step 2: Configure your EC2 instance
 
 Now we have Terraform installed we are ready to define the configuration for our first EC2 machine. If you don't have an AWS account, or you don't know how to grab either your access keys or SSH keys, read here: [link] (google.com, "To be updated")
 
-Move the unzipped folder somewhere that will be easy for you to navigate to from the command line.  Open the file called ```main.tf```.  Using your favorite text editor, add your AWS access keys and SSH key file name to it. **Warning: Never post your access keys on the internet**
+Move the unzipped folder somewhere that will be easy for you to navigate to from the command line.  Open the file called ```main.tf```.  Using your favorite text editor, add your AWS access keys and SSH key file name to it. You can also change the instance region here as well: ```region = "us-west-2"```.  Amazon has a directory of all the possible repos [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions).
+
+**Warning: NEVER post your access keys on the internet, or any public repo. Somebody will find them, and rack up hundreds of billable hours to your instance**
 
 ```
 provider "aws" {
@@ -50,6 +54,8 @@ provider "aws" {
   region     = "us-west-2"
 }
 ```
+
+Below you can also customize the size of your instance.  For a full list of possible servers, [see here](https://aws.amazon.com/ec2/instance-types/ "Instance sizes").  I recommend the T2/M4 series for an all-purpose notebook, and the C4 series for any high intensity work.  
 
 ```
 resource "aws_instance" "mynode" {
@@ -62,4 +68,41 @@ resource "aws_instance" "mynode" {
   key_name = "YOUR_SSH_KEY_NAME_GOES_HERE"
 }
 ```
-Note: The key_name should be the "/link/to/your/key.pem"!
+Note: The key_name should be the "/link/to/your/key"! Do not include the ```.pem```.
+
+## Step 3: Install Ansible
+
+If you don't have Ansible, install it via [this guide](http://docs.ansible.com/ansible/latest/intro_installation.html#installation).  We recommend installing via pip or apt-get if you're on Mac on Linux. 
+
+## Step 4: Test install
+
+Navigate into your config directory from the terminal.  Run the following command to build and configure your install.
+```
+terraform apply
+```
+After a few minutes, you should get the IP address of your instance.  You should be able to navigate to the instance by going to the IP address in your browser.
+
+<img src="https://image.ibb.co/dS5sB5/Screen_Shot_2017_09_18_at_1_23_06_PM.png" alt="Jupyter" width="600">
+
+To shut down your instance, run the following code:
+```
+terraform destroy
+```
+
+## Step 5: Connecting via SFTP
+
+Transfering data between your local machine and the instance is handled by an SFTP client like [FileZilla](https://filezilla-project.org/), which is the recommended free solution for most users.
+
+You'll need to add the IP address and your key-file, and your instance has to be running to connect via SFTP.
+
+<img src="https://image.ibb.co/fseNdk/Screen_Shot_2017_09_18_at_1_07_22_PM.png" alt="FileZilla" width="600">
+
+Your Jupyter home directory is located here: ```/home/ubuntu/storage```
+
+
+## Step 6: User Guide
+
+To get the most of your experience read the additional documentation In the [user guide], where we cover the following customizations:
+
+1. How to password protect your instance
+2. How to customize the packages that are pre-installed by your instance  
