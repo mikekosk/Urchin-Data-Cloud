@@ -13,6 +13,8 @@ The script installs and configures:
 
 ## Installation
 
+[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
+
 See (https://www.google.com "Install Guide")
 
 ## Demo
