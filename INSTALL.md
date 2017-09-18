@@ -102,7 +102,7 @@ Your Jupyter home directory is located here: ```/home/ubuntu/storage```
 
 ## Step 6: User Guide
 
-To get the most of your experience read the additional documentation In the [user guide], where we cover the following customizations:
+To get the most of your experience read the additional documentation In the [user guide](https://github.com/mikekosk/datascience-cloud/blob/master/USER-GUIDE.md), where we cover the following customizations:
 
 1. How to password protect your instance
 2. How to customize the packages that are pre-installed by your instance  
