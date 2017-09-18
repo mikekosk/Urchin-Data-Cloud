@@ -45,10 +45,9 @@ Move the unzipped folder somewhere that will be easy for you to navigate to from
 ```
 provider "aws" {
 
-  access_key = "your_access_key_goes_here"
-  secret_key = "your_secret_key_goes_here"
+  access_key = "YOUR_ACCESS_KEY_GOES_HERE"
+  secret_key = "YOUR_SECRET_KEY_GOES_HERE"
   region     = "us-west-2"
-  <b>tag</b>.
 }
 ```
 
@@ -60,8 +59,7 @@ resource "aws_instance" "mynode" {
     Name = "mynode"
   }
   security_groups = ["${aws_security_group.allow_all.name}"]
-  key_name = "your_ssh_key_name_goes_here"
+  key_name = "YOUR_SSH_KEY_NAME_GOES_HERE"
 }
-
-
-
+```
+Note: The key_name should be the "/link/to/your/key.pem"!
