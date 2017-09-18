@@ -13,13 +13,11 @@ The script installs and configures:
 
 ## Installation
 
-[I'm an inline-style link with title](https://www.google.com "Google's Homepage")
-
-See (https://www.google.com "Install Guide")
+See [Install Guide](https://www.google.com "Install Guice")
 
 ## Demo
 
 ## License
 
-(https://github.com/electron/electron/blob/master/LICENSE "MIT")
+[MIT](https://github.com/electron/electron/blob/master/LICENSE "MIT")
 
