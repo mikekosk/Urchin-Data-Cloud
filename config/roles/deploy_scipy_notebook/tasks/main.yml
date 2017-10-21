@@ -1,0 +1,10 @@
+---
+- name: Create persistent data folder
+  become: false
+  file:
+    path: /home/ubuntu/storage
+    state: directory
+    mode: 0755
+
+- name: Deploy Scipy Notebook
+  raw: docker run -d --rm -v "/home/ubuntu/storage:/home/jovyan/work" -p 80:8888 jupyter/scipy-notebook start-notebook.sh --NotebookApp.token=
