@@ -22,7 +22,7 @@ You'll need to save the unzipped binary somewhere on your computer. Make a folde
 The final install step is to add the binary to your computer's path.  You'll have to edit the path link below and add it to your BASH file.  See [this page](https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux) for instructions on setting the PATH on Linux and Mac. [This page](https://stackoverflow.com/questions/1618280/where-can-i-set-path-to-make-exe-on-windows) contains instructions for setting the PATH on Windows.
 
 ```
-$ export PATH="/link/to/terraform:$PATH"
+$ export PATH="/link/to/terraform_folder:$PATH"
 ```
 
 Reload your terminal or force it to read ~/.bashrc again:
