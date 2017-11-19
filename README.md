@@ -1,6 +1,6 @@
 # Urchin Labs Data Cloud
 
-I often felt limited by my computer's processing power and memory capacity to run large data problems.  However, building a data science environment in the cloud (and installing all the packages I needed) was time consuming and difficult.  I wished there was a way to have access to powerful computational resources with only a single click.  These scripts will spin up an Amazon EC2 instance and transform it into a data science environment that is no different than working within your local Jupyter notebook. 
+I often felt limited by my computer's processing power and memory capacity to run large data science problems.  However, building a data science environment in the cloud (and installing all the packages I needed) was time consuming and difficult.  I wished there was a way to have access to powerful computational resources with only a single click.  This one-line script will spin up an Amazon EC2 instance and transform it into a data science environment that is no different than working within your local Jupyter notebook. 
 
 As a default, the script installs and configures:
 
@@ -10,6 +10,8 @@ As a default, the script installs and configures:
 - Conda R v3.3.x and channel
 - plyr, devtools, shiny, rmarkdown, forecast, rsqlite, reshape2, nycflights13, caret, rcurl, and randomforest pre-installed
 - The tidyverse R packages are also installed, including ggplot2, dplyr, tidyr, readr, purrr, tibble, stringr, lubridate, and broom
+
+Adding additional packages is as easy as editing the Docker file that comes with this project.  Even if you're not interested in data science, this is a great way to try creating and hosting a Docker container. 
 
 ## Installation
 
