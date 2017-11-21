@@ -2,12 +2,15 @@
 
 Following this installation guide, you will be able to spin up a custom EC2 instance with just one command.  Instructions have been tested on Ubuntu Linux and Mac OSX.  
 
-Setup should take less than 10 minutes if you're familiar with these tools, but still less than 30 minutes if you're starting from scratch. 
+Setup should take less than 30 minutes if you're familiar with these tools, but less than an hour if you're starting from scratch.
 
 **You will be installing:**
 - Terraform - to spin up an EC2 instance programmatically 
 - Ansible - to configure the instance and install our packages
 - Docker - to build and run our containers
+
+**requirements**
+- Willingness to learn!
 
 ## Step 1: Install Terraform
 
@@ -30,6 +33,7 @@ $ export PATH="/link/to/terraform_folder:$PATH"
 Reload your terminal or force it to read ~/.bashrc again with ```$ source ~/.bashrc```
 
 Verify your installation by typing “terraform” in your terminal with no arguments. If your installation was successful, you should see something similar:
+
 ```
 $ terraform 
 Usage: terraform [--version] [--help] <command> [args]
@@ -40,9 +44,9 @@ Usage: terraform [--version] [--help] <command> [args]
 
 Now we have Terraform installed we are ready to define the configuration for our first EC2 machine. If you don't have an AWS account, [create one first here](https://aws.amazon.com/).  Don't worry, you can do all this on the free tier of Amazon AWS.  
 
-Next, move the unzipped folder somewhere that will be easy for you to navigate to from the command line.  Open the file called ```terraform.tfvars```.  Using your favorite text editor, first add your AWS access keys. 
+Next, move the unzipped folder somewhere that will be easy for you to navigate to from the command line.  Open the file called ```terraform.tfvars```.  Using your text editor, add your AWS access keys, [for which instructions can be found here](https://aws.amazon.com/blogs/security/wheres-my-secret-access-key/).
 
-**Warning: NEVER post your access keys on the internet, or any public repo. Somebody will find them, and rack up hundreds of billable hours to your instance**
+**Warning: NEVER post your access keys on the internet, or any public repo. Somebody will find them, and rack up hundreds of billable hours to your instance. Source: Happened to me :(**
 
 ```
 access_key = "ACCESS_KEY"
@@ -56,12 +60,17 @@ Below you can also customize the size of your instance.  For a full list of poss
 specs = {
   "type" = "t2.medium",
   "name" = "mynode",
-  "key_name" = "Work"
+  "key_name" = "Work" \\this is the file name, do not include the extension!
 }
 ```
-Lastly, you'll have to send 
 
-Note: The key_name should be the "/link/to/your/key"! Do not include the ```.pem```.
+Lastly, you'll have to download your key file and store it in your .ssh folder.  [See here how to create and download your key file](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html).  Save the file somewhere you can access it and move it to your home directory .ssh folder.  If you don't know where that is, follow the code along below to create a folder and copy it to the directory
+
+```
+cd
+mkdir .ssh
+cp /link/to/your/key.pem ~/.ssh/
+```
 
 ## Step 3: Install Ansible
 
