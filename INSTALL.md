@@ -19,17 +19,15 @@ Find the appropriate package for your system and download it from [here](https:/
 
 You'll need to save the unzipped binary somewhere on your computer. Make a folder somewhere safe where you can store it. 
 
-The final install step is to add the binary to your computer's path.  You'll have to edit the path link below and add it to your BASH file.  See [this page](https://stackoverflow.com/questions/14637979/how-to-permanently-set-path-on-linux) for instructions on setting the PATH on Linux and Mac. [This page](https://stackoverflow.com/questions/1618280/where-can-i-set-path-to-make-exe-on-windows) contains instructions for setting the PATH on Windows.
+The final install step is to add the binary to your computer's PATH.  You'll have to edit the PATH link below and add it to your BASH file.  See [this page](https://github.com/mikekosk/Urchin-Data-Cloud/blob/master/BASH-PROFILE.md) for my detailed explantion of what PATH is and how to edit it on Linux and Mac. [This page](https://stackoverflow.com/questions/1618280/where-can-i-set-path-to-make-exe-on-windows) contains instructions for setting the PATH on Windows.
+
+On MAC, you'll need to add the additional path to your .bash_profile as shown below. 
 
 ```
 $ export PATH="/link/to/terraform_folder:$PATH"
 ```
 
-Reload your terminal or force it to read ~/.bashrc again:
-
-```
-$ source ~/.bashrc
-```
+Reload your terminal or force it to read ~/.bashrc again with ```$ source ~/.bashrc```
 
 Verify your installation by typing “terraform” in your terminal with no arguments. If your installation was successful, you should see something similar:
 ```
@@ -40,34 +38,29 @@ Usage: terraform [--version] [--help] <command> [args]
 
 ## Step 2: Configure your EC2 instance
 
-Now we have Terraform installed we are ready to define the configuration for our first EC2 machine. If you don't have an AWS account, or you don't know how to grab either your access keys or SSH keys, read here: [link] (google.com, "To be updated")
+Now we have Terraform installed we are ready to define the configuration for our first EC2 machine. If you don't have an AWS account, [create one first here](https://aws.amazon.com/).  Don't worry, you can do all this on the free tier of Amazon AWS.  
 
-Move the unzipped folder somewhere that will be easy for you to navigate to from the command line.  Open the file called ```main.tf```.  Using your favorite text editor, add your AWS access keys and SSH key file name to it. You can also change the instance region here as well: ```region = "us-west-2"```.  Amazon has a directory of all the possible repos [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions).
+Next, move the unzipped folder somewhere that will be easy for you to navigate to from the command line.  Open the file called ```terraform.tfvars```.  Using your favorite text editor, first add your AWS access keys. 
 
 **Warning: NEVER post your access keys on the internet, or any public repo. Somebody will find them, and rack up hundreds of billable hours to your instance**
 
 ```
-provider "aws" {
+access_key = "ACCESS_KEY"
+secret_key = "SECRET_KEY"
+```
+You can also change the instance region here as well: ```region = "us-west-2"```.  Amazon has a directory of all the possible regions [here](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions).
 
-  access_key = "YOUR_ACCESS_KEY_GOES_HERE"
-  secret_key = "YOUR_SECRET_KEY_GOES_HERE"
-  region     = "us-west-2"
+Below you can also customize the size of your instance.  For a full list of possible servers, [see here](https://aws.amazon.com/ec2/instance-types/ "Instance sizes").  I recommend the T2/M4 series for an all-purpose notebook, and the C4 series for any high intensity work.  The micro and medium instances are free and sufficient for this project.  
+
+```
+specs = {
+  "type" = "t2.medium",
+  "name" = "mynode",
+  "key_name" = "Work"
 }
 ```
+Lastly, you'll have to send 
 
-Below you can also customize the size of your instance.  For a full list of possible servers, [see here](https://aws.amazon.com/ec2/instance-types/ "Instance sizes").  I recommend the T2/M4 series for an all-purpose notebook, and the C4 series for any high intensity work.  
-
-```
-resource "aws_instance" "mynode" {
-  ami = "${data.aws_ami.ubuntu.id}"
-  instance_type = "t2.medium"
-  tags {
-    Name = "mynode"
-  }
-  security_groups = ["${aws_security_group.allow_all.name}"]
-  key_name = "YOUR_SSH_KEY_NAME_GOES_HERE"
-}
-```
 Note: The key_name should be the "/link/to/your/key"! Do not include the ```.pem```.
 
 ## Step 3: Install Ansible
